@@ -35,7 +35,7 @@ jobs:
 
             - name: read-version
               id: read-version # needed to read the step output in the next step
-              working-directory: ./packages/acceptance-testing/docker/web-builder
+              working-directory: ./docker
               run: echo ::set-output name=DOCKER_TAG::$(cat version | xargs) # using xargs to trim surrounding whitespace
 
             - name: build-docker
