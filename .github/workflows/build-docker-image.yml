@@ -18,10 +18,11 @@ jobs:
 
             - name: setup-quemu
               id: qemu
-              uses: docker/setup-qemu-action@v1
-              with:
-                  image: tonistiigi/binfmt:latest
-                  platforms: amd64
+              uses: docker/setup-qemu-action@v2
+#              uses: docker/setup-qemu-action@v1
+#              with:
+#                  image: tonistiigi/binfmt:latest
+#                  platforms: amd64
 
             - name: available-platforms
               run: echo ${{ steps.qemu.outputs.platforms }}
