@@ -1,0 +1,45 @@
+name: build-web-builder-docker
+
+on:
+    workflow_dispatch:
+        inputs:
+        # no inputs
+
+jobs:
+    build-docker:
+        name: build-docker
+
+        # not using self-hosted-org because this needs to run docker in privileged mode (see setup-builder step)
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout
+              uses: actions/checkout@v2
+
+            - name: setup-quemu
+              id: qemu
+              uses: docker/setup-qemu-action@v1
+              with:
+                  image: tonistiigi/binfmt:latest
+                  platforms: amd64
+
+            - name: available-platforms
+              run: echo ${{ steps.qemu.outputs.platforms }}
+
+            - name: setup-builder
+              run: |
+                  docker run --privileged --rm tonistiigi/binfmt --install all
+                  echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u ${{secrets.DOCKERHUB_USER}} --password-stdin
+                  docker buildx create --name mybuilder --use
+                  docker buildx ls
+
+            - name: read-version
+              id: read-version # needed to read the step output in the next step
+              working-directory: ./packages/acceptance-testing/docker/web-builder
+              run: echo ::set-output name=DOCKER_TAG::$(cat version | xargs) # using xargs to trim surrounding whitespace
+
+            - name: build-docker
+              working-directory: ./docker
+              run: |
+                  echo "TAG=${{ steps.read-version.outputs.DOCKER_TAG }}"
+                  docker buildx build -t "bertuz/docker-chromium:${{ steps.read-version.outputs.DOCKER_TAG }}" --platform linux/amd64,linux/arm64 . --push
