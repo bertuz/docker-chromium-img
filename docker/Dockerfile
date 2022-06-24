@@ -58,8 +58,7 @@ RUN sed -i -e 's/# es_ES.UTF-8 UTF-8/es_ES.UTF-8 UTF-8/' /etc/locale.gen && \
 # install chromium
 # IMPORTANT the chromium version must be the same as the one used by puppeteer in acceptance-testing package
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    chromium=93.0.4577.82-1 \
-    chromium-l10n=93.0.4577.82-1
+    chromium-bsu chromium-shell chromium-sandbox chromium-common
 
 # install nodejs and related stuff
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
