@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 debian:unstable-20211011-slim
+FROM debian:unstable-20211011-slim
 
 # install required packages and utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -55,18 +55,11 @@ RUN apt-get install -y --no-install-recommends \
 RUN sed -i -e 's/# es_ES.UTF-8 UTF-8/es_ES.UTF-8 UTF-8/' /etc/locale.gen && \
     dpkg-reconfigure --frontend=noninteractive locales
 
-
-RUN apt-get update
-RUN apt-get install chromium -fy
-
 # install chromium
 # IMPORTANT the chromium version must be the same as the one used by puppeteer in acceptance-testing package
-#RUN apt-get update && apt-get install -y --no-install-recommends \
-#    chromium=93.0.4577.82-1 \
-#    chromium-l10n=93.0.4577.82-1
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN dpkg -i google-chrome-stable_current_amd64.deb --fix-missing; apt-get -fy install
-RUN dpkg -i google-chrome-stable_current_amd64.deb
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    chromium=93.0.4577.82-1 \
+    chromium-l10n=93.0.4577.82-1
 
 # install nodejs and related stuff
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
@@ -82,7 +75,7 @@ ENV LANGUAGE es_ES.UTF-8
 ENV LANG es_ES.UTF-8
 ENV LC_ALL es_ES.UTF-8
 
-CMD ["/usr/bin/google-chrome", \
+CMD ["/usr/bin/chromium", \
     "--lang=es_ES", \
     # flags from https://github.com/GoogleChrome/puppeteer/blob/master/lib/Launcher.js
     "--disable-background-networking", \
