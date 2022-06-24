@@ -77,7 +77,7 @@ ENV LANGUAGE es_ES.UTF-8
 ENV LANG es_ES.UTF-8
 ENV LC_ALL es_ES.UTF-8
 
-CMD ["/usr/bin/chromium", \
+CMD ["/usr/bin/google-chrome", \
     "--lang=es_ES", \
     # flags from https://github.com/GoogleChrome/puppeteer/blob/master/lib/Launcher.js
     "--disable-background-networking", \
