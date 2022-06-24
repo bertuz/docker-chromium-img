@@ -55,6 +55,10 @@ RUN apt-get install -y --no-install-recommends \
 RUN sed -i -e 's/# es_ES.UTF-8 UTF-8/es_ES.UTF-8 UTF-8/' /etc/locale.gen && \
     dpkg-reconfigure --frontend=noninteractive locales
 
+
+RUN apt-get update
+RUN apt-get install chromium -fy
+
 # install chromium
 # IMPORTANT the chromium version must be the same as the one used by puppeteer in acceptance-testing package
 #RUN apt-get update && apt-get install -y --no-install-recommends \
