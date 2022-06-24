@@ -61,7 +61,7 @@ RUN sed -i -e 's/# es_ES.UTF-8 UTF-8/es_ES.UTF-8 UTF-8/' /etc/locale.gen && \
 #    chromium=93.0.4577.82-1 \
 #    chromium-l10n=93.0.4577.82-1
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN dpkg -i google-chrome-stable_current_amd64.deb --fix-missing; apt-get -fy install`
+RUN dpkg -i google-chrome-stable_current_amd64.deb --fix-missing; apt-get -fy install
 
 # install nodejs and related stuff
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
