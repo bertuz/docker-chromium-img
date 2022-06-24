@@ -60,6 +60,8 @@ RUN sed -i -e 's/# es_ES.UTF-8 UTF-8/es_ES.UTF-8 UTF-8/' /etc/locale.gen && \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium-bsu chromium-shell chromium-sandbox chromium-common
 
+RUN apt-get install -y chromium
+
 # install nodejs and related stuff
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -74,7 +76,7 @@ ENV LANGUAGE es_ES.UTF-8
 ENV LANG es_ES.UTF-8
 ENV LC_ALL es_ES.UTF-8
 
-CMD ["/usr/bin/chromium-shell", \
+CMD ["/usr/bin/chromium", \
     "--lang=es_ES", \
     # flags from https://github.com/GoogleChrome/puppeteer/blob/master/lib/Launcher.js
     "--disable-background-networking", \
