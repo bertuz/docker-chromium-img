@@ -27,12 +27,12 @@ jobs:
 #            - name: available-platforms
 #              run: echo ${{ steps.qemu.outputs.platforms }}
 #
-#            - name: setup-builder
-#              run: |
-#                  docker run --privileged --rm tonistiigi/binfmt --install all
-#                  echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u ${{secrets.DOCKERHUB_USER}} --password-stdin
-#                  docker buildx create --name mybuilder --use
-#                  docker buildx ls
+            - name: setup-builder
+              run: |
+                  docker run --privileged --rm tonistiigi/binfmt --install all
+                  echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u ${{secrets.DOCKERHUB_USER}} --password-stdin
+                  docker buildx create --name mybuilder --use
+                  docker buildx ls
 
             - name: read-version
               id: read-version # needed to read the step output in the next step
