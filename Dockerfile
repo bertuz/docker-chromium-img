@@ -1,4 +1,4 @@
-FOM debian:unstable-20211011-slim
+FROM debian:unstable-20211011-slim
 
 # install required packages and utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
