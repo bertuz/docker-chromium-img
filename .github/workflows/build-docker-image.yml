@@ -14,19 +14,9 @@ jobs:
 
         steps:
             - name: checkout
-              uses: actions/checkout@v2
-
-#            - name: setup-quemu
-#              id: qemu
-#              uses: docker/setup-qemu-action@v2
-#              uses: docker/setup-qemu-action@v1
-#              with:
-#                  image: tonistiigi/binfmt:latest
-#                  platforms: amd64
-#
-#            - name: available-platforms
-#              run: echo ${{ steps.qemu.outputs.platforms }}
-#
+              uses: actions/checkout@v3
+            - run: cat .env >> $GITHUB_ENV
+            
             - name: setup-builder
               run: |
                   docker run --privileged --rm tonistiigi/binfmt --install all
@@ -34,13 +24,9 @@ jobs:
                   docker buildx create --name mybuilder --use
                   docker buildx ls
 
-            - name: read-version
-              id: read-version # needed to read the step output in the next step
-              working-directory: ./docker
-              run: echo ::set-output name=DOCKER_TAG::$(cat version | xargs) # using xargs to trim surrounding whitespace
-
             - name: build-docker
-              working-directory: ./docker
+              working-directory: ./
               run: |
                   echo "TAG=${{ steps.read-version.outputs.DOCKER_TAG }}"
-                  docker buildx build -t "bertuz/docker-chromium:${{ steps.read-version.outputs.DOCKER_TAG }}" --platform linux/amd64,linux/arm64 . --push
+                  docker buildx build -t "$DOCKER_HUB_REPO:$DOCKER_IMAGE_VERSION" --platform linux/amd64,linux/arm64 . --push
+

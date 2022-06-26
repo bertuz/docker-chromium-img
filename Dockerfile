@@ -1,4 +1,4 @@
-FROM debian:unstable-20211011-slim
+FOM debian:unstable-20211011-slim
 
 # install required packages and utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -72,12 +72,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN npm install -g yarn@^1.22.15
 
 ENV TZ UTC
-ENV LANGUAGE es_ES.UTF-8
-ENV LANG es_ES.UTF-8
-ENV LC_ALL es_ES.UTF-8
+ENV LANGUAGE en-US.UTF-8
+ENV LANG en-US.UTF-8
+ENV LC_ALL en-US.UTF-8
 
 CMD ["/usr/bin/chromium", \
-    "--lang=es_ES", \
+    "--lang=en-US", \
     # flags from https://github.com/GoogleChrome/puppeteer/blob/master/lib/Launcher.js
     "--disable-background-networking", \
     "--disable-background-timer-throttling", \
