@@ -1,9 +1,11 @@
 version: "3"
 services:
     chromium:
-        image: bertuz/docker-chromium:chromium93.0.4577-1.2.4-6
+        build:
+            context: ./
+            dockerfile: Dockerfile
+            args:
+                ARCH: linux/amd64
         shm_size: "1gb"
-        environment:
-            - DISPLAY=192.168.1.78:0
         ports:
             - "9222:9222"
