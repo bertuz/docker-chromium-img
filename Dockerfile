@@ -1,5 +1,8 @@
 FROM debian:unstable-20211011-slim
 
+ADD entrypoint.sh /usr/bin/entrypoint.sh
+ADD import_cert.sh /usr/bin/
+
 # install required packages and utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
