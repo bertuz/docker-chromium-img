@@ -60,7 +60,8 @@ RUN sed -i -e 's/# es_ES.UTF-8 UTF-8/es_ES.UTF-8 UTF-8/' /etc/locale.gen && \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium-bsu chromium-shell chromium-sandbox chromium-common
 
-RUN apt-get install -y chromium
+RUN ln -s /usr/bin/chromium /usr/bin/google-chrome-unstable
+RUN apt-get install -y chromium iproute2
 
 # install nodejs and related stuff
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
@@ -76,36 +77,37 @@ ENV LANGUAGE en-US.UTF-8
 ENV LANG en-US.UTF-8
 ENV LC_ALL en-US.UTF-8
 
-CMD ["/usr/bin/chromium", \
-    "--lang=en-US", \
-    # flags from https://github.com/GoogleChrome/puppeteer/blob/master/lib/Launcher.js
-    "--disable-background-networking", \
-    "--disable-background-timer-throttling", \
-    "--disable-breakpad", \
-    "--disable-client-side-phishing-detection", \
-    "--disable-default-apps", \
-    "--disable-dev-shm-usage", \
-    "--disable-extensions", \
-    "--disable-features=site-per-process", \
-    "--disable-hang-monitor", \
-    "--disable-popup-blocking", \
-    "--disable-prompt-on-repost", \
-    "--disable-sync", \
-    "--disable-translate", \
-    "--metrics-recording-only", \
-    "--no-first-run", \
-    "--safebrowsing-disable-auto-update", \
-    "--enable-automation", \
-    "--password-store=basic", \
-    "--use-mock-keychain", \
-    "--headless", \
-    "--hide-scrollbars", \
-    # Disable sandbox mode
-    "--no-sandbox", \
-    # Avoids font rendering differences between headless/headfull
-    "--font-render-hinting=none", \
-    # Expose port 9222 for remote debugging
-    "--remote-debugging-port=9222", \
-    "--remote-debugging-address=0.0.0.0", \
-    "--ignore-certificate-errors" \
-    ]
+CMD ["/usr/bin/entrypoint.sh"]
+#CMD ["/usr/bin/chromium", \
+#    "--lang=en-US", \
+#    # flags from https://github.com/GoogleChrome/puppeteer/blob/master/lib/Launcher.js
+#    "--disable-background-networking", \
+#    "--disable-background-timer-throttling", \
+#    "--disable-breakpad", \
+#    "--disable-client-side-phishing-detection", \
+#    "--disable-default-apps", \
+#    "--disable-dev-shm-usage", \
+#    "--disable-extensions", \
+#    "--disable-features=site-per-process", \
+#    "--disable-hang-monitor", \
+#    "--disable-popup-blocking", \
+#    "--disable-prompt-on-repost", \
+#    "--disable-sync", \
+#    "--disable-translate", \
+#    "--metrics-recording-only", \
+#    "--no-first-run", \
+#    "--safebrowsing-disable-auto-update", \
+#    "--enable-automation", \
+#    "--password-store=basic", \
+#    "--use-mock-keychain", \
+#    "--headless", \
+#    "--hide-scrollbars", \
+#    # Disable sandbox mode
+#    "--no-sandbox", \
+#    # Avoids font rendering differences between headless/headfull
+#    "--font-render-hinting=none", \
+#    # Expose port 9222 for remote debugging
+#    "--remote-debugging-port=9222", \
+#    "--remote-debugging-address=0.0.0.0", \
+#    "--ignore-certificate-errors" \
+#    ]
