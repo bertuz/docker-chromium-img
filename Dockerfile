@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     git \
     unzip \
-    procps
+    procps \
+    inotify-tools
 
 # chrome dependencies for puppeteer installed chrome
 # see https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix
