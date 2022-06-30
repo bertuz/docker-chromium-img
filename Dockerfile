@@ -81,8 +81,8 @@ ENV LANGUAGE en-US.UTF-8
 ENV LANG en-US.UTF-8
 ENV LC_ALL en-US.UTF-8
 ENV HOME=/root
-ENV DEBUG_ADDRESS=0.0.0.0
-ENV DEBUG_PORT=9222
+ENV DEBUG_ADDRESS='0.0.0.0'
+ENV DEBUG_PORT='9222'
 
 CMD ["/usr/bin/entrypoint.sh"]
 #CMD ["/usr/bin/chromium", \
