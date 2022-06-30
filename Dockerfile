@@ -80,6 +80,7 @@ ENV TZ UTC
 ENV LANGUAGE en-US.UTF-8
 ENV LANG en-US.UTF-8
 ENV LC_ALL en-US.UTF-8
+ENV HOME=/root DEBUG_ADDRESS=0.0.0.0 DEBUG_PORT=9222
 
 CMD ["/usr/bin/entrypoint.sh"]
 #CMD ["/usr/bin/chromium", \
