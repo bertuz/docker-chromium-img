@@ -1,6 +1,7 @@
 # Chromium for linux/amd64,linux/arm64
 This is my repo in order to create a docker image running a chromium headless instance for regression testing.
-The image works on both arm and amd64 achitecture.
+The image works on both arm and amd64 achitecture and is suitable for a seamless use with the library [docker-chromium](https://www.npmjs.com/package/docker-chromium), 
+especially with my forked version available on [this repo and branch]()
 
 In order to ease the automation of the generation of the image, a github action workflow is there for you:
 
