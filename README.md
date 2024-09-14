@@ -1,4 +1,5 @@
 # docker-chromium
+With explicit platform
 
 ![Tests](https://github.com/gidztech/docker-chromium/workflows/Tests/badge.svg)
 **Node library for controlling a Chromium instance running in a Docker container**
